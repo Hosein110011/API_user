@@ -10,9 +10,9 @@ class FileUrlSerializer(serializers.ModelSerializer):
         fields = ['upload_file']
         
 
-class UploadFileSerializer(Serializer):
-    upload_file = FileField()
+class UploadSerializer(serializers.HyperlinkedModelSerializer):
+    
     class Meta:
         model = Asset
-        fields = ["asset_id", 'upload_file', 'type_file', 'content']
+        fields = ['asset_id','upload_file', 'file_type', 'content']
         

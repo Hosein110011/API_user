@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from .serializers import FileUrlSerializer, UploadFileSerializer
+from .serializers import FileUrlSerializer, UploadSerializer
 from rest_framework.response import Response
 # from rest_framework.status import status
 from .models import Asset
 from rest_framework.decorators import APIView
-from rest_framework import viewsets
+from rest_framework.viewsets import ViewSet
 
 
 
@@ -15,18 +15,21 @@ class FileUrlView(APIView):
         
         return Response(serialize.data)
        
+class UploadViewSet(ViewSet):
+    serializer_class = UploadSerializer
 
-class UploadFileView(viewsets.ViewSet):
-    def post(self, request):
-        asset_id = request.data['asset_id']
-        upload_file = request.FILES.get('upload')
-        file_type = request.data['file_type']
-        content = request.data['content']
-        new_asset = Asset(asset_id = asset_id, upload_file = upload_file, file_type = file_type ,content = content)
-        new_asset.save()
-        serialize = UploadFileSerializer(new_asset, data = request.data)
+    def list(self, request):
+        return Response("GET API")
+    
+    def create(self, request):
+        asset_id = request.POST.get('asset_id')
+        upload_file = request.FILES.get('upload_file')
+        file_type = request.POST.get('file_type')
+        content = request.POST.get('content')
+        new = Asset.objects.create(asset_id=asset_id, upload_file=upload_file, file_type=file_type, content=content)
+        new.save()
+        serialize = UploadSerializer(new, data=request.data)
         if serialize.is_valid():
             serialize.save()
             return Response(serialize.data)
-        print(serialize.data)
-        return Response({'detail':'not valid'})
+        return Response("BAD")
