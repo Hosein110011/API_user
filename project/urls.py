@@ -4,5 +4,5 @@ from .views import SpecialProjectView
 
 
 urlpatterns = [
-    path('special/', SpecialProjectView.as_view(), name = 'special-projects')
+    path('special/<int:begin>/<int:end>/', SpecialProjectView.as_view(), name = 'special-projects')
 ]
