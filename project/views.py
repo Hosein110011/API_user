@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 
 class SpecialProjectView(APIView):
-    def post(self, request, begin, end):
+    def get(self, request, begin, end):
         begin = int(begin)
         end = int(end)
         projects = Project.objects.all()[begin:end]
