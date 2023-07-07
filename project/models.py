@@ -11,6 +11,7 @@ class Project(models.Model):
     
     
     project_id = models.TextField()
+    preview = models.ImageField(upload_to='project', null=True)
     publisher_id = models.TextField()
     content = models.TextField()
     state = models.IntegerField(choices=STATE_TYPE_CHOICES, default=2)

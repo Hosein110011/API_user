@@ -12,6 +12,7 @@ class Asset(models.Model):
     )
 
     asset_id = models.IntegerField(default=1)
+    preview = models.ImageField(upload_to='asset',null=True)
     upload_file = models.FileField(upload_to='upload')
     file_type = models.IntegerField(choices=FILE_TYPE_CHOICES, default=1)
     content = models.TextField()

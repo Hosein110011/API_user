@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     # installed apps:
     'rest_framework','rest_framework_simplejwt',
     # my apps:
-    'account', 'asset', 'project',
+    'account', 'asset', 'project', 'versions',
 ]
 
 MIDDLEWARE = [
